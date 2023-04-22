@@ -2,7 +2,7 @@ package br.com.rborges.dao;
 
 import br.com.rborges.domain.Cliente;
 
-import java.util.Collections;
+import java.util.Collection;
 
 /**
  * @author Rebeca

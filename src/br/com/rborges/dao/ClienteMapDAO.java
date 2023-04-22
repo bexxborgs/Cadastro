@@ -10,7 +10,6 @@ import java.util.Map;
  * @author Rebeca
  */
 public class ClienteMapDAO implements  IClienteDAO {
-
     private Map<Long, Cliente> map;
     public ClienteMapDAO() {
         this.map = new HashMap<>();
@@ -50,11 +49,11 @@ public class ClienteMapDAO implements  IClienteDAO {
 
     @Override
     public Cliente consultar(Long cpf) {
-        return null;
+        return this.map.get(cpf);
     }
 
     @Override
     public Collection<Cliente> buscarTodos() {
-        return null;
+        return this.map.values();
     }
 }
