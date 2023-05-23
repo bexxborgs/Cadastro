@@ -1,3 +1,4 @@
+
 package br.com.rborges.domain;
 
 import java.util.Objects;
@@ -24,7 +25,7 @@ public class Cliente {
         this.cidade =  cidade;
         this.estado = estado;
 
-
+// TRIM TIRA OS ESPAÇOS QUE É ESCRITO NO CPF
     }
 
     public String getNome() {
@@ -83,19 +84,31 @@ public class Cliente {
         this.estado = estado;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return cpf.equals(cliente.cpf);
-    }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(cpf);
+    public int hashCode(){
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.cpf);
+        return hash;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
 
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()){
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (!Objects.equals(this.cpf,other.cpf)){
+            return false;
+        }
+        return true;
+    }
     @Override
     public String toString() {
         return "Cliente{" +
