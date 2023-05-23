@@ -10,9 +10,9 @@ import javax.swing.*;
  */
     public class App {
 
-     private static IClienteDAO iClienteDAO;
+    private static IClienteDAO iClienteDAO;
 
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         iClienteDAO = new ClienteMapDAO();
 
         String opcao = JOptionPane.showInputDialog(null,
@@ -33,23 +33,44 @@ import javax.swing.*;
             if (isOpcaoSair(opcao)) {
                 sair();
             } else if (isCadastro(opcao)) {
-            String dados = JOptionPane.showInputDialog(null,"Digite os dados do cliente separaods por virgula conforme, o exemplo: Nome,CPF, Telefone, endereço,numero,cidade e estado",
-                    "Cadastro",JOptionPane.INFORMATION_MESSAGE);
+                String dados = JOptionPane.showInputDialog(null, "Digite os dados do cliente separaods por virgula conforme, o exemplo: Nome,CPF, Telefone, endereço,numero,cidade e estado",
+                        "Cadastro", JOptionPane.INFORMATION_MESSAGE);
                 cadastrar(dados);
-            } else if (isConsultar(opcao)){
+            } else if (isConsultar(opcao)) {
                 String dados = JOptionPane.showInputDialog(null,
                         "Digite o CPF",
-                        "Consultar",JOptionPane.INFORMATION_MESSAGE);
-
+                        "Consultar", JOptionPane.INFORMATION_MESSAGE);
                 consultar(dados);
+            } else if (isExclusao(opcao)) {
+                String dados = JOptionPane.showInputDialog(null,
+                        "Digite o CPF",
+                        "Consultar", JOptionPane.INFORMATION_MESSAGE);
+                excluir(dados);
+            } else {
+                String dados = JOptionPane.showInputDialog(null,
+                        "Digite os dados do cliente separaods por virgula conforme, o exemplo: Nome,CPF, Telefone, endereço,numero,cidade e estado",
+                        "Green dinner", JOptionPane.INFORMATION_MESSAGE);
             }
         }
+    }
+
+    private static void excluir(String dados) {
+    }
+
+    private static boolean isExclusao(String opcao) {
+
     }
 
     private static void consultar(String dados) {
         // validar se foi passado só o cpf
         Cliente cliente = iClienteDAO.consultar(Long.parseLong(dados));
-        JOptionPane.showMessageDialog(null, "Cliente encontrado" + cliente.toString(),  "Sucesso",JOptionPane.INFORMATION_MESSAGE;
+        if (cliente != null) {
+            JOptionPane.showMessageDialog(null, "Cliente encontrado" + cliente.toString(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+            JOptionPane.showMessageDialog(null, "Cliente encontrado" , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
     }
 
     private static boolean isConsultar(String opcao) {
