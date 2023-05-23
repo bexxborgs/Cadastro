@@ -1,5 +1,6 @@
-import br.com.rborges.dao.ClienteMapDAO;
+package br.com.rborges;
 
+import br.com.rborges.dao.ClienteMapDAO;
 import br.com.rborges.dao.IClienteDAO;
 import br.com.rborges.domain.Cliente;
 
@@ -18,7 +19,6 @@ import javax.swing.*;
         String opcao = JOptionPane.showInputDialog(null,
                 "Digite 1 para cadastro, 2 para consultar, " + "3 para explusão,4 para alteração ou 5 para sair",
                 "Cadastro", JOptionPane.INFORMATION_MESSAGE);
-
 
         while (!isOpcaoValida(opcao)) {
             if ("".equals(opcao)) {
@@ -59,6 +59,7 @@ import javax.swing.*;
 
     private static boolean isExclusao(String opcao) {
 
+        return false;
     }
 
     private static void consultar(String dados) {
