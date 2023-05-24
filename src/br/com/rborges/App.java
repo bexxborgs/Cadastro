@@ -5,7 +5,6 @@ import br.com.rborges.dao.IClienteDAO;
 import br.com.rborges.domain.Cliente;
 
 import javax.swing.*;
-
 /**
  * @author Rebeca
  */
@@ -30,36 +29,51 @@ import javax.swing.*;
         }
 
         while (isOpcaoCadastro(opcao)) {
+
             if (isOpcaoSair(opcao)) {
                 sair();
+
             } else if (isCadastro(opcao)) {
-                String dados = JOptionPane.showInputDialog(null, "Digite os dados do cliente separaods por virgula conforme, o exemplo: Nome,CPF, Telefone, endereço,numero,cidade e estado",
+                String dados = JOptionPane.showInputDialog(null,
+                        "Digite os dados do cliente separaods por virgula conforme, o exemplo: Nome,CPF, Telefone, endereço,numero,cidade e estado",
                         "Cadastro", JOptionPane.INFORMATION_MESSAGE);
                 cadastrar(dados);
-            } else if (isConsultar(opcao)) {
+            } else if (isConsulta(opcao)) {
                 String dados = JOptionPane.showInputDialog(null,
-                        "Digite o CPF",
+                        "Digite o CPF do cliente",
                         "Consultar", JOptionPane.INFORMATION_MESSAGE);
                 consultar(dados);
             } else if (isExclusao(opcao)) {
                 String dados = JOptionPane.showInputDialog(null,
-                        "Digite o CPF",
+                        "Digite o CPF do cliente",
                         "Consultar", JOptionPane.INFORMATION_MESSAGE);
                 excluir(dados);
             } else {
                 String dados = JOptionPane.showInputDialog(null,
                         "Digite os dados do cliente separaods por virgula conforme, o exemplo: Nome,CPF, Telefone, endereço,numero,cidade e estado",
                         "Green dinner", JOptionPane.INFORMATION_MESSAGE);
+                atualizar(dados);
             }
         }
     }
 
-    private static void excluir(String dados) {
+    private static boolean isExclusao(String opcao) {
+      if ("3".equals(opcao)){
+          return true;
+      }
+      return false;
     }
 
-    private static boolean isExclusao(String opcao) {
+    private static void atualizar(String dados) {
+        String[] dadosSeparados = dados.split(",");
+        Cliente cliente = new Cliente(dadosSeparados[0],dadosSeparados[1],dadosSeparados[2],dadosSeparados[3],dadosSeparados[4],dadosSeparados[5],dadosSeparados[6]);
+        iClienteDAO.alterar(cliente);
+    }
 
-        return false;
+    private static void excluir(String dados) {
+        iClienteDAO.excluir(Long.parseLong(dados));
+        JOptionPane.showMessageDialog(null,"Cliente excluido com sucesso: ", "Sucesso", JOptionPane.INFORMATION_MESSAGE;
+
     }
 
     private static void consultar(String dados) {
@@ -71,10 +85,9 @@ import javax.swing.*;
             JOptionPane.showMessageDialog(null, "Cliente encontrado" , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
         }
-
     }
 
-    private static boolean isConsultar(String opcao) {
+    private static boolean isConsulta (String opcao) {
         if ("2".equals(opcao)) {
             return true;
         }
